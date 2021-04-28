@@ -1,0 +1,18 @@
+---
+actions:
+  to: kubernetes/overlays/local/service.yaml
+---
+# Generated on {{now}}
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{artifactId}}
+  labels:
+    app: {{artifactId}}
+spec:
+  ports:
+    - name: {{artifactId}}
+      port: 80
+  selector:
+    app: {{artifactId}}
+  type: NodePort

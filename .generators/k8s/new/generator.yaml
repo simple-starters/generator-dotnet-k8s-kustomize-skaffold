@@ -1,0 +1,3 @@
+command:
+  description: Create new Kubernetes resource files for deployment using Kustomize and Skaffold
+

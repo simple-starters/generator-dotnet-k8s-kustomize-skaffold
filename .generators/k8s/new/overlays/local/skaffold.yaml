@@ -1,0 +1,33 @@
+---
+actions:
+  to: skaffold.yaml
+---
+apiVersion: skaffold/v1
+kind: Config
+profiles:
+  - name: local
+    build:
+      artifacts:
+        - image: lift/{{artifactId}}
+          custom:
+            buildCommand: ./do-docker.sh
+            dependencies:
+              paths:
+                - .
+      tagPolicy:
+        sha256: {}
+      local:
+        push: false
+    deploy:
+      kubectl:
+        manifests:
+          - deployments/kubernetes/local/manifest.yaml
+#
+# Will be using k8s yaml files for services
+#
+  - name: local-services
+    deploy:
+      kubectl:
+        manifests:
+          - deployments/kubernetes/local-services/**/manifest.yaml
+
